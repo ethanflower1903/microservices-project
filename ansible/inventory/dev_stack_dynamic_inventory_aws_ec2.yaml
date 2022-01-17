@@ -3,19 +3,19 @@ regions:
   - "us-east-1"
 filters:
   tag:app-stack-name: david5-Petclinic-App-38
-  tag:environment: dev
-keyed_groups:
-  - key: tags['app-stack-name']
-    prefix: 'app_stack_'
-    separator: ''
-  - key: tags['swarm-role']
-    prefix: 'role_'
-    separator: ''
-  - key: tags['environment']
-    prefix: 'env_'
-    separator: ''
-  - key: tags['server']
-    separator: ''
+  #tag:environment: dev
+#keyed_groups:
+ # - key: tags['app-stack-name']
+  #  prefix: 'app_stack_'
+  #  separator: ''
+ # - key: tags['swarm-role']
+ #   prefix: 'role_'
+ #   separator: ''
+ # - key: tags['environment']
+ #   prefix: 'env_'
+  #  separator: ''
+  #- key: tags['server']
+  #  separator: ''
 hostnames:
   - "private-ip-address"
 compose:
