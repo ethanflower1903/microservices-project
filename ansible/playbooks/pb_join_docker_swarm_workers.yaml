@@ -1,0 +1,20 @@
+- hosts: role_grand_master
+  tasks:
+  - name: Get swarm join-token for workers
+    shell: docker swarm join-token worker | grep -i 'docker'
+    register: join_command_for_workers
+
+  - debug: msg='{{ join_command_for_workers.stdout.strip() }}'
+  
+  - name: register grand_master with variable
+    add_host:
+      name: "grand_master"
+      worker_join: "{{ join_command_for_workers.stdout.strip() }}"
+
+- hosts: role_worker
+  tasks:
+  - name: Join workers to swarm
+    shell: "{{ hostvars['grand_master']['worker_join'] }}"
+    register: result_of_joining
+
+  - debug: msg='{{ result_of_joining.stdout }}'

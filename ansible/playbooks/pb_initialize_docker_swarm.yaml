@@ -1,0 +1,16 @@
+- hosts: role_grand_master
+  tasks:
+  - name: initialize docker swarm
+    shell: docker swarm init
+  - name: install git
+    yum:
+      name: git
+      state: present
+  - name: run the visualizer app for docker swarm
+    shell: |
+      docker service create \
+        --name=viz \
+        --publish=8088:8080/tcp \
+        --constraint=node.role==manager \
+        --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+        dockersamples/visualizer
