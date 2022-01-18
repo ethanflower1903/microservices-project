@@ -1,0 +1,11 @@
+plugin: aws_ec2
+regions:
+  - "us-east-1"
+filters:
+  tag:app-stack-name: APP_STACK_NAME
+  tag:environment: dev
+  tag:swarm-role: grand-master
+hostnames:
+  - "private-ip-address"
+compose:
+  ansible_user: "'ec2-user'"
